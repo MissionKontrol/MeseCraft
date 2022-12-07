@@ -225,6 +225,8 @@ function hb.register_hudbar(identifier, text_color, label, textures, default_sta
 			-- This section is a potential bug magnet, please watch with care!
 			-- The size of the bar image is expected to be exactly 2×16 pixels.
 			bar_size = nil
+			bar_size = {x=2, y=16}
+
 		elseif hb.settings.bar_type == "statbar_classic" or hb.settings.bar_type == "statbar_modern" then
 			bar_image = textures.icon
 			bgicon = textures.bgicon

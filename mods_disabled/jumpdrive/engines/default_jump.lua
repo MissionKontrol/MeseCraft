@@ -2,7 +2,7 @@
 
 jumpdrive.simulate_jump = function(pos, player, show_marker)
 
-	local targetPos = jumpdrive.get_meta_pos(pos)
+	local target_pos = jumpdrive.get_meta_pos(pos)
 
 	if jumpdrive.check_mapgen(pos) then
 		return false, "Error: mapgen was active in this area, please try again later for your own safety!"
@@ -10,7 +10,7 @@ jumpdrive.simulate_jump = function(pos, player, show_marker)
 
 	local meta = minetest.get_meta(pos)
 	local radius = jumpdrive.get_radius(pos)
-	local distance = vector.distance(pos, targetPos)
+	local distance = vector.distance(pos, target_pos)
 
 	local playername = meta:get_string("owner")
 
@@ -21,8 +21,8 @@ jumpdrive.simulate_jump = function(pos, player, show_marker)
 	local radius_vector = {x=radius, y=radius, z=radius}
 	local source_pos1 = vector.subtract(pos, radius_vector)
 	local source_pos2 = vector.add(pos, radius_vector)
-	local target_pos1 = vector.subtract(targetPos, radius_vector)
-	local target_pos2 = vector.add(targetPos, radius_vector)
+	local target_pos1 = vector.subtract(target_pos, radius_vector)
+	local target_pos2 = vector.add(target_pos, radius_vector)
 
 	local x_overlap = (target_pos1.x <= source_pos2.x and target_pos1.x >= source_pos1.x) or
 		(target_pos2.x <= source_pos2.x and target_pos2.x >= source_pos1.x)
@@ -39,7 +39,7 @@ jumpdrive.simulate_jump = function(pos, player, show_marker)
 	minetest.get_voxel_manip():read_from_map(target_pos1, target_pos2)
 
 	if show_marker then
-		jumpdrive.show_marker(targetPos, radius, "red")
+		jumpdrive.show_marker(target_pos, radius, "red")
 		jumpdrive.show_marker(pos, radius, "green")
 	end
 
@@ -51,11 +51,11 @@ jumpdrive.simulate_jump = function(pos, player, show_marker)
 		return false, "Can't jump node @ " .. minetest.pos_to_string(nodepos)
 	end
 
-	if minetest.find_node_near(targetPos, radius, "vacuum:vacuum", true) then
+	if minetest.find_node_near(target_pos, radius, "vacuum:vacuum", true) then
 		msg = "Warning: Jump-target is in vacuum!"
 	end
 
-	if minetest.find_node_near(targetPos, radius, "ignore", true) then
+	if minetest.find_node_near(target_pos, radius, "ignore", true) then
 		return false, "Warning: Jump-target is in uncharted area"
 	end
 
@@ -75,7 +75,7 @@ jumpdrive.simulate_jump = function(pos, player, show_marker)
 	end
 
 	-- check preflight conditions
-	local preflight_result = jumpdrive.preflight_check(pos, targetPos, radius, playername)
+	local preflight_result = jumpdrive.preflight_check(pos, target_pos, radius, playername)
 
 	if not preflight_result.success then
 		-- check failed in customization
@@ -86,7 +86,7 @@ jumpdrive.simulate_jump = function(pos, player, show_marker)
 		success = false
 	end
 
-	local power_req = jumpdrive.calculate_power(radius, distance, pos, targetPos)
+	local power_req = jumpdrive.calculate_power(radius, distance, pos, target_pos)
 	local powerstorage = meta:get_int("powerstorage")
 
 	if powerstorage < power_req then
@@ -106,16 +106,16 @@ jumpdrive.execute_jump = function(pos, player)
 	local meta = minetest.get_meta(pos)
 
 	local radius = jumpdrive.get_radius(pos)
-	local targetPos = jumpdrive.get_meta_pos(pos)
+	local target_pos = jumpdrive.get_meta_pos(pos)
 
-	local distance = vector.distance(pos, targetPos)
-	local power_req = jumpdrive.calculate_power(radius, distance, pos, targetPos)
+	local distance = vector.distance(pos, target_pos)
+	local power_req = jumpdrive.calculate_power(radius, distance, pos, target_pos)
 
 	local radius_vector = {x=radius, y=radius, z=radius}
 	local source_pos1 = vector.subtract(pos, radius_vector)
 	local source_pos2 = vector.add(pos, radius_vector)
-	local target_pos1 = vector.subtract(targetPos, radius_vector)
-	local target_pos2 = vector.add(targetPos, radius_vector)
+	local target_pos1 = vector.subtract(target_pos, radius_vector)
+	local target_pos2 = vector.add(target_pos, radius_vector)
 
 	local success, msg = jumpdrive.simulate_jump(pos, player, false)
 	if not success then

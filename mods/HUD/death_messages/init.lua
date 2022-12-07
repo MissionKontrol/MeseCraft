@@ -273,7 +273,7 @@ minetest.register_on_leaveplayer(death_messages.reset_watchers)
 
 minetest.register_on_dieplayer(function(player)
 	name = player:get_player_name()
-	local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
+	local node = minetest.registered_nodes[minetest.get_node(player:get_pos()).name]
 	local message
 	--Death by entity
 	if death_messages.punched[name] and death_messages.punched[name] ~= name then

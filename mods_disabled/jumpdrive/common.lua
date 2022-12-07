@@ -24,7 +24,7 @@ jumpdrive.get_radius = function(pos)
 end
 
 -- calculates the power requirements for a jump
-jumpdrive.calculate_power = function(radius, distance, sourcePos, targetPos)
+jumpdrive.calculate_power = function(radius, distance, sourcePos, target_pos)
 	return 10 * distance * radius
 end
 

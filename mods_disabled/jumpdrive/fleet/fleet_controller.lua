@@ -108,13 +108,13 @@ minetest.register_node("jumpdrive:fleet_controller", {
 		minetest.log("action", "[jumpdrive-fleet] backbone traversing took " ..
 			(t1 - t0) .. " us @ " .. minetest.pos_to_string(pos))
 
-		local targetPos = {x=meta:get_int("x"),y=meta:get_int("y"),z=meta:get_int("z")}
+		local target_pos = {x=meta:get_int("x"),y=meta:get_int("y"),z=meta:get_int("z")}
 
 		-- sort by distance, farthes first
 		jumpdrive.fleet.sort_engines(pos, engines_pos_list)
 
 		-- apply new coordinates
-		jumpdrive.fleet.apply_coordinates(pos, targetPos, engines_pos_list)
+		jumpdrive.fleet.apply_coordinates(pos, target_pos, engines_pos_list)
 
 		if fields.jump then
 			--TODO check overlapping engines/radius

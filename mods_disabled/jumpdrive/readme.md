@@ -121,7 +121,7 @@ The default fuel calc can be overwritten by a depending mod:
 
 ```lua
 -- calculates the power requirements for a jump
-jumpdrive.calculate_power = function(radius, distance, sourcePos, targetPos)
+jumpdrive.calculate_power = function(radius, distance, sourcePos, target_pos)
 	return 10 * distance * radius
 end
 ```

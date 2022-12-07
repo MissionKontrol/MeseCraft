@@ -217,12 +217,12 @@ jumpdrive.fleet.digiline_effector = function(pos, _, channel, msg)
 		return
 	end
 
-	local targetPos = jumpdrive.get_meta_pos(pos)
+	local target_pos = jumpdrive.get_meta_pos(pos)
 
 	if msg.command == "get" then
 
 		local engines_pos_list = jumpdrive.fleet.find_engines(pos)
-		local fleetdata = jumpdrive.fleet.get_fleet_data(pos, targetPos, engines_pos_list)
+		local fleetdata = jumpdrive.fleet.get_fleet_data(pos, target_pos, engines_pos_list)
 		digilines.receptor_send(pos, digilines.rules.default, set_channel, fleetdata)
 
 	elseif msg.command == "reset" then
@@ -275,7 +275,7 @@ jumpdrive.fleet.digiline_effector = function(pos, _, channel, msg)
 		end
 
 		-- apply new coordinates
-		jumpdrive.fleet.apply_coordinates(pos, targetPos, engines_pos_list)
+		jumpdrive.fleet.apply_coordinates(pos, target_pos, engines_pos_list)
 
 		local owner = minetest.get_player_by_name(playername)
 		jumpdrive.fleet.digiline_async_simulate(pos, channel, owner, engines_pos_list)
@@ -297,10 +297,10 @@ jumpdrive.fleet.digiline_effector = function(pos, _, channel, msg)
 		end
 
 		-- apply new coordinates
-		jumpdrive.fleet.apply_coordinates(pos, targetPos, engines_pos_list)
+		jumpdrive.fleet.apply_coordinates(pos, target_pos, engines_pos_list)
 
 		local owner = minetest.get_player_by_name(playername)
-		jumpdrive.fleet.digiline_async_jump(pos, targetPos, channel, owner, engines_pos_list)
+		jumpdrive.fleet.digiline_async_jump(pos, target_pos, channel, owner, engines_pos_list)
 
 	end
 end

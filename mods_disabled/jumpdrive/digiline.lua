@@ -25,17 +25,17 @@ jumpdrive.digiline_effector = function(pos, _, channel, msg)
 	end
 
 	local radius = jumpdrive.get_radius(pos)
-	local targetPos = jumpdrive.get_meta_pos(pos)
+	local target_pos = jumpdrive.get_meta_pos(pos)
 
-	local distance = vector.distance(pos, targetPos)
-	local power_req = jumpdrive.calculate_power(radius, distance, pos, targetPos)
+	local distance = vector.distance(pos, target_pos)
+	local power_req = jumpdrive.calculate_power(radius, distance, pos, target_pos)
 
 	if msg.command == "get" then
 		digilines.receptor_send(pos, digilines.rules.default, set_channel, {
 			powerstorage = meta:get_int("powerstorage"),
 			radius = radius,
 			position = pos,
-			target = targetPos,
+			target = target_pos,
 			distance = distance,
 			power_req = power_req
 		})
@@ -94,7 +94,7 @@ jumpdrive.digiline_effector = function(pos, _, channel, msg)
 		local send_pos = pos
 		if success then
 			-- send new message in target pos
-			send_pos = targetPos
+			send_pos = target_pos
 			digilines.receptor_send(send_pos, digilines.rules.default, set_channel, {
 				success = success,
 				time = timeormsg

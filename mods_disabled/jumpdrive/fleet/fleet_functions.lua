@@ -2,9 +2,9 @@
 jumpdrive.fleet = {}
 
 -- applies the new coordinates derived from the relative position of the controller
-jumpdrive.fleet.apply_coordinates = function(controllerPos, targetPos, engine_pos_list)
+jumpdrive.fleet.apply_coordinates = function(controllerPos, target_pos, engine_pos_list)
 	-- delta between source and target
-	local delta_vector = vector.subtract(targetPos, controllerPos)
+	local delta_vector = vector.subtract(target_pos, controllerPos)
 	minetest.log("action", "[jumpdrive-fleet] delta-vector: " .. minetest.pos_to_string(delta_vector))
 
 	for _,node_pos in pairs(engine_pos_list) do

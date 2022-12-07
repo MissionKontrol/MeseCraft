@@ -68,7 +68,7 @@ mapgen_helper.perlin2d = function(name, minp, maxp, perlin_params)
 	if buffer.nobj_perlin.get_2d_map_flat then
 		return buffer.nobj_perlin:get_2d_map_flat({x=minp.x, y=minp.z}, perlin_buffers[name].nvals_perlin_buffer)
 	else
-		return buffer.nobj_perlin:get2dMap_flat({x=minp.x, y=minp.z}, perlin_buffers[name].nvals_perlin_buffer)
+		return buffer.nobj_perlin:get_posMap_flat({x=minp.x, y=minp.z}, perlin_buffers[name].nvals_perlin_buffer)
 	end	
 end
 

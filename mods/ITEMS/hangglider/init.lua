@@ -211,7 +211,7 @@ minetest.register_entity("hangglider:glider", {
 		if self.object:get_attach() then
 			local player = self.object:get_attach("parent")
 			if player then
-				local pos = player:getpos()
+				local pos = player:get_pos()
 				local pname = player:get_player_name()
 				if hangglider.use[pname] then
 					local mrn_name = minetest.registered_nodes[minetest.get_node(vector.new(pos.x, pos.y-0.5, pos.z)).name]

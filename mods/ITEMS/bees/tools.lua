@@ -14,8 +14,8 @@
           for i=1,6 do
             minetest.add_particle({
               pos = {x=pos.x+math.random()-0.5, y=pos.y, z=pos.z+math.random()-0.5},
-              vel = {x=0,y=0.5+math.random(),z=0},
-              acc = {x=0,y=0,z=0},
+             velocity= {x=0,y=0.5+math.random(),z=0},
+              acceleration = {x=0,y=0,z=0},
               expirationtime = 2+math.random(2.5),
               size = math.random(3),
               collisiondetection = false,
